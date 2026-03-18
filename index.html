@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Riesgos Legislativos - Concesiones Mineras</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -39,7 +43,7 @@
     .card {
       background: white;
       border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
       padding: 20px;
       margin-bottom: 25px;
     }
@@ -63,16 +67,21 @@
       background: #115e59;
     }
 
+    .table-wrap {
+      overflow-x: auto;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 15px;
       background: white;
-      overflow: hidden;
       border-radius: 12px;
+      overflow: hidden;
     }
 
-    th, td {
+    th,
+    td {
       border: 1px solid #d1d5db;
       padding: 12px;
       text-align: left;
@@ -81,8 +90,9 @@
     }
 
     th {
-      background: #000000;
-      color: #ffffff;
+      background: #000;
+      color: #fff;
+      white-space: nowrap;
     }
 
     tr:nth-child(even) {
@@ -90,18 +100,18 @@
     }
 
     .col-numero {
-      width: 60px;
+      width: 55px;
       text-align: center;
       font-weight: bold;
     }
 
     .col-info {
-      width: 80px;
+      width: 75px;
       text-align: center;
     }
 
     .col-objeto {
-      width: 52%;
+      min-width: 420px;
     }
 
     .col-links {
@@ -111,13 +121,14 @@
 
     .badge {
       display: inline-block;
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       color: white;
       text-align: center;
       line-height: 1.1;
+      white-space: nowrap;
     }
 
     .importante {
@@ -130,50 +141,6 @@
 
     .neutro {
       background: #6b7280;
-    }
-
-    .tooltip {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .tooltip .tooltip-text {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-
-  max-width: 250px;
-  width: 250px;
-
-  background: #6b7280;
-  color: #fff;
-
-  text-align: left;
-  border-radius: 10px;
-  padding: 10px 12px;
-
-  position: absolute;
-  z-index: 999;
-
-  bottom: 140%;
-  left: 50%;
-  transform: translateX(-50%);
-
-  font-size: 13px;
-  line-height: 1.4;
-
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  word-break: break-word;
-
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    }
-
-    .tooltip:hover .tooltip-text {
-      visibility: visible;
-      opacity: 1;
     }
 
     .icon-btn {
@@ -189,6 +156,9 @@
       margin: 0 2px;
       text-decoration: none;
       vertical-align: middle;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
     }
 
     .icon-btn:hover {
@@ -198,17 +168,23 @@
     .objeto-wrap {
       display: flex;
       align-items: flex-start;
-      gap: 8px;
       justify-content: space-between;
+      gap: 8px;
     }
 
     .objeto-texto {
       flex: 1;
+      min-width: 0;
+      line-height: 1.45;
     }
 
     .objeto-icons {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 4px;
+      margin-left: 6px;
+      flex-shrink: 0;
       white-space: nowrap;
-      margin-left: 8px;
     }
 
     footer {
@@ -221,31 +197,47 @@
     .popup {
       display: none;
       position: fixed;
-      z-index: 999;
+      z-index: 99999;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.55);
+      padding: 20px;
     }
 
     .popup-content {
       background: white;
-      width: 90%;
-      max-width: 500px;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 12px;
+      width: 92%;
+      max-width: 700px;
+      margin: 5% auto;
+      padding: 22px;
+      border-radius: 14px;
       position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
     .close {
       position: absolute;
-      right: 15px;
-      top: 10px;
-      font-size: 24px;
+      right: 14px;
+      top: 8px;
+      font-size: 26px;
       cursor: pointer;
       color: #444;
+    }
+
+    .popup-content h3 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      color: #0f172a;
+    }
+
+    .popup-content p {
+      line-height: 1.6;
+      white-space: pre-wrap;
+      margin: 0;
     }
   </style>
 </head>
@@ -257,173 +249,182 @@
   </header>
 
   <div class="container">
-
     <div class="card intro">
       <p>
         Esta web resume las iniciativas legislativas identificadas sobre concesiones mineras,
         considerando su objeto, impacto, probabilidad en el periodo y nivel de riesgo.
       </p>
-      <button class="btn" onclick="abrirPopup()">Ver resumen general</button>
+      <button class="btn" onclick="abrirPopupResumen()">Ver resumen general</button>
     </div>
 
     <div class="card">
       <h2>Tabla de iniciativas</h2>
 
-      <table>
-        <thead>
-          <tr>
-            <th class="col-numero">N°</th>
-            <th class="col-info">Info</th>
-            <th class="col-objeto">Objeto del proyecto</th>
-            <th>Impacto</th>
-            <th>Probabilidad</th>
-            <th>Riesgo</th>
-            <th class="col-links">Links</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-numero">N°</th>
+              <th class="col-info">Info</th>
+              <th class="col-objeto">Objeto del proyecto</th>
+              <th>Impacto</th>
+              <th>Probabilidad</th>
+              <th>Riesgo</th>
+              <th class="col-links">Links</th>
+            </tr>
+          </thead>
+          <tbody>
 
-          <!-- FILA 1 -->
-          <tr>
-            <td class="col-numero">1</td>
+            <tr>
+              <td class="col-numero">1</td>
 
-            <td class="col-info">
-              <span class="tooltip icon-btn">
-                ℹ
-                <span class="tooltip-text">
-                  3377 20-10-2022 Congresistas Salhuana Cavides, Chiabra León, Julón Irigoín, García Correa, Torres Salinas, y Trigozo Reátegui, del Grupo Parlamentario Alianza Para el Progreso.
-                </span>
-              </span>
-            </td>
+              <td class="col-info">
+                <button
+                  class="icon-btn"
+                  onclick="abrirPopupTexto('Información de la fila 1', '3377 - 20-10-2022.\nCongresistas Salhuana Cavides, Chiabra León, Julón Irigoin, García Correa, Torres Salinas y Trigozo Reátegui, del Grupo Parlamentario Alianza Para el Progreso.')"
+                  title="Ver información"
+                >
+                  ℹ
+                </button>
+              </td>
 
-            <td>
-              <div class="objeto-wrap">
-                <div class="objeto-texto">
-                  Ley que establece el régimen de presentación de petitorios y otorgamiento de concesión minera en zonas de pequeña minería y minería artesanal de Madre de Dios comprendidas en el Anexo 1 del Decreto Legislativo 1100.
+              <td>
+                <div class="objeto-wrap">
+                  <div class="objeto-texto">
+                    Ley que establece el régimen de presentación de petitorios y otorgamiento de concesión minera en zonas de pequeña minería y minería artesanal de Madre de Dios comprendidas en el Anexo 1 del Decreto Legislativo 1100.
+                  </div>
+
+                  <div class="objeto-icons">
+                    <button
+                      class="icon-btn"
+                      onclick="abrirPopupTexto('Detalle del proyecto 1', 'El 06-06-2024 la Comisión de Energía y Minas (comisión principal) presentó dictamen en mayoría, con una fórmula sustitutoria.\n\nEl 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con una fórmula sustitutoria.\n\nSe encuentra para el debate en la agenda del Pleno del Congreso.')"
+                      title="Ver detalle"
+                    >
+                      👁
+                    </button>
+
+                    <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MTkzMTkx/pdf" target="_blank" class="icon-btn" title="Documento 1">📄</a>
+                    <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MjM4MzI4/pdf" target="_blank" class="icon-btn" title="Documento 2">📄</a>
+                  </div>
                 </div>
+              </td>
 
-                <div class="objeto-icons">
-                  <span class="tooltip icon-btn">
-                    👁
-                    <span class="tooltip-text">
-                      El 06-06-2024 la Comisión de Energía y Minas (comisión principal) presentó dictamen en mayoría, con una fórmula sustitutoria. El 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con una formula sustitutoria.SE ENCUENTRA PARA EL DEBATE EN LA AGENDA DEL PLENO DEL CONGRESO.
-                    </span>
-                  </span>
+              <td><span class="badge importante">IMPORTANTE</span></td>
+              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+              <td><span class="badge neutro">NEUTRO</span></td>
+              <td class="col-links">
+                <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
+                <a href="https://www.gob.pe/" target="_blank" class="icon-btn" title="Documento">📄</a>
+              </td>
+            </tr>
 
-                  <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MTkzMTkx/pdf" class="icon-btn" title="Link 1">📄</a>
-                  <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MjM4MzI4/pdf" class="icon-btn" title="Link 2">📄</a>
+            <tr>
+              <td class="col-numero">2</td>
+
+              <td class="col-info">
+                <button
+                  class="icon-btn"
+                  onclick="abrirPopupTexto('Información de la fila 2', 'Escribe aquí la información editable de esta segunda fila.')"
+                  title="Ver información"
+                >
+                  ℹ
+                </button>
+              </td>
+
+              <td>
+                <div class="objeto-wrap">
+                  <div class="objeto-texto">
+                    Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado por Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones mineras y evitar la existencia de concesiones ociosas.
+                  </div>
+
+                  <div class="objeto-icons">
+                    <button
+                      class="icon-btn"
+                      onclick="abrirPopupTexto('Detalle del proyecto 2', 'Escribe aquí la información del ojo para la segunda fila.')"
+                      title="Ver detalle"
+                    >
+                      👁
+                    </button>
+
+                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
+                  </div>
                 </div>
-              </div>
-            </td>
+              </td>
 
-            <td><span class="badge importante">IMPORTANTE</span></td>
-            <td><span class="badge muy-probable">MUY PROBABLE</span></td>
-            <td><span class="badge neutro">NEUTRO</span></td>
-            <td class="col-links">
-              <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
-              <a href="https://www.gob.pe/" target="_blank" class="icon-btn" title="Documento">📄</a>
-            </td>
-          </tr>
+              <td><span class="badge importante">IMPORTANTE</span></td>
+              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+              <td><span class="badge neutro">NEUTRO</span></td>
+              <td class="col-links">
+                <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
+              </td>
+            </tr>
 
-          <!-- FILA 2 -->
-          <tr>
-            <td class="col-numero">2</td>
+            <!-- MODELO PARA NUEVAS FILAS
+            <tr>
+              <td class="col-numero">3</td>
 
-            <td class="col-info">
-              <span class="tooltip icon-btn">
-                ℹ
-                <span class="tooltip-text">
-                  Escribe aquí la información editable de esta segunda fila.
-                </span>
-              </span>
-            </td>
+              <td class="col-info">
+                <button
+                  class="icon-btn"
+                  onclick="abrirPopupTexto('Información de la fila 3', 'Escribe aquí la información editable de esta fila.')"
+                  title="Ver información"
+                >
+                  ℹ
+                </button>
+              </td>
 
-            <td>
-              <div class="objeto-wrap">
-                <div class="objeto-texto">
-                  Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado por Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones mineras y evitar la existencia de concesiones ociosas.
+              <td>
+                <div class="objeto-wrap">
+                  <div class="objeto-texto">
+                    Escribe aquí el objeto del proyecto.
+                  </div>
+
+                  <div class="objeto-icons">
+                    <button
+                      class="icon-btn"
+                      onclick="abrirPopupTexto('Detalle del proyecto 3', 'Escribe aquí la información del ojo para esta fila.')"
+                      title="Ver detalle"
+                    >
+                      👁
+                    </button>
+
+                    <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Documento 1">📄</a>
+                    <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Documento 2">📄</a>
+                  </div>
                 </div>
+              </td>
 
-                <div class="objeto-icons">
-                  <span class="tooltip icon-btn">
-                    👁
-                    <span class="tooltip-text">
-                      Escribe aquí la información del ojo para la segunda fila.
-                    </span>
-                  </span>
+              <td><span class="badge importante">IMPORTANTE</span></td>
+              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+              <td><span class="badge neutro">NEUTRO</span></td>
+              <td class="col-links">
+                <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
+                <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Documento">📄</a>
+              </td>
+            </tr>
+            -->
 
-                  <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
-                </div>
-              </div>
-            </td>
-
-            <td><span class="badge importante">IMPORTANTE</span></td>
-            <td><span class="badge muy-probable">MUY PROBABLE</span></td>
-            <td><span class="badge neutro">NEUTRO</span></td>
-            <td class="col-links">
-              <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
-            </td>
-          </tr>
-
-          <!--
-          MODELO PARA NUEVAS FILAS
-
-          <tr>
-            <td class="col-numero">3</td>
-
-            <td class="col-info">
-              <span class="tooltip icon-btn">
-                ℹ
-                <span class="tooltip-text">
-                  Escribe aquí la información editable de esta fila.
-                </span>
-              </span>
-            </td>
-
-            <td>
-              <div class="objeto-wrap">
-                <div class="objeto-texto">
-                  Escribe aquí el objeto del proyecto.
-                </div>
-
-                <div class="objeto-icons">
-                  <span class="tooltip icon-btn">
-                    👁
-                    <span class="tooltip-text">
-                      Escribe aquí la información del ojo para esta fila.
-                    </span>
-                  </span>
-
-                  <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
-                  <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Link 2">📄</a>
-                </div>
-              </div>
-            </td>
-
-            <td><span class="badge importante">IMPORTANTE</span></td>
-            <td><span class="badge muy-probable">MUY PROBABLE</span></td>
-            <td><span class="badge neutro">NEUTRO</span></td>
-            <td class="col-links">
-              <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
-              <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Documento">📄</a>
-            </td>
-          </tr>
-          -->
-
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
-
   </div>
 
-  <div id="miPopup" class="popup">
+  <div id="popupResumen" class="popup">
     <div class="popup-content">
-      <span class="close" onclick="cerrarPopup()">&times;</span>
+      <span class="close" onclick="cerrarPopupResumen()">&times;</span>
       <h3>Resumen general</h3>
       <p>
-        El PPT presenta riesgos legislativos vinculados a concesiones mineras. Ambas iniciativas
-        son consideradas de impacto importante, muy probables en el periodo y con riesgo neutro.
+El PPT presenta riesgos legislativos vinculados a concesiones mineras. Ambas iniciativas son consideradas de impacto importante, muy probables en el periodo y con riesgo neutro.
       </p>
+    </div>
+  </div>
+
+  <div id="popupTexto" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="cerrarPopupTexto()">&times;</span>
+      <h3 id="popupTextoTitulo">Detalle</h3>
+      <p id="popupTextoContenido"></p>
     </div>
   </div>
 
@@ -432,20 +433,36 @@
   </footer>
 
   <script>
-    function abrirPopup() {
-      document.getElementById("miPopup").style.display = "block";
+    function abrirPopupResumen() {
+      document.getElementById("popupResumen").style.display = "block";
     }
 
-    function cerrarPopup() {
-      document.getElementById("miPopup").style.display = "none";
+    function cerrarPopupResumen() {
+      document.getElementById("popupResumen").style.display = "none";
+    }
+
+    function abrirPopupTexto(titulo, contenido) {
+      document.getElementById("popupTextoTitulo").innerText = titulo;
+      document.getElementById("popupTextoContenido").innerText = contenido;
+      document.getElementById("popupTexto").style.display = "block";
+    }
+
+    function cerrarPopupTexto() {
+      document.getElementById("popupTexto").style.display = "none";
     }
 
     window.onclick = function(event) {
-      const popup = document.getElementById("miPopup");
-      if (event.target === popup) {
-        popup.style.display = "none";
+      const popupResumen = document.getElementById("popupResumen");
+      const popupTexto = document.getElementById("popupTexto");
+
+      if (event.target === popupResumen) {
+        popupResumen.style.display = "none";
       }
-    }
+
+      if (event.target === popupTexto) {
+        popupTexto.style.display = "none";
+      }
+    };
   </script>
 
 </body>
