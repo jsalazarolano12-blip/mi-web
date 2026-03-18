@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Riesgos Legislativos - Concesiones Mineras</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -63,13 +67,19 @@
       background: #115e59;
     }
 
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 12px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 15px;
       background: white;
-      overflow: hidden;
       border-radius: 12px;
+      overflow: visible; /* CAMBIO IMPORTANTE */
     }
 
     th, td {
@@ -78,6 +88,7 @@
       text-align: left;
       vertical-align: top;
       font-size: 14px;
+      overflow: visible; /* CAMBIO IMPORTANTE */
     }
 
     th {
@@ -118,6 +129,7 @@
       color: white;
       text-align: center;
       line-height: 1.1;
+      white-space: nowrap;
     }
 
     .importante {
@@ -142,25 +154,40 @@
       visibility: hidden;
       opacity: 0;
       transition: opacity 0.2s ease;
-      width: 220px;
+      width: 340px;
+      max-width: 340px;
       background: #111827;
       color: #fff;
       text-align: left;
-      border-radius: 8px;
-      padding: 10px;
+      border-radius: 10px;
+      padding: 12px 14px;
       position: absolute;
-      z-index: 999;
-      bottom: 130%;
-      left: 50%;
-      transform: translateX(-50%);
+      z-index: 9999;
+      top: 50%;
+      left: calc(100% + 12px);
+      transform: translateY(-50%);
       font-size: 12px;
-      line-height: 1.4;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.20);
+      line-height: 1.5;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      white-space: pre-line; /* RESPETA SALTOS DE LÍNEA */
+      word-break: break-word;
+      pointer-events: none;
     }
 
     .tooltip:hover .tooltip-text {
       visibility: visible;
       opacity: 1;
+    }
+
+    .tooltip .tooltip-text::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -7px;
+      transform: translateY(-50%);
+      border-width: 7px;
+      border-style: solid;
+      border-color: transparent #111827 transparent transparent;
     }
 
     .icon-btn {
@@ -176,6 +203,7 @@
       margin: 0 2px;
       text-decoration: none;
       vertical-align: middle;
+      flex-shrink: 0;
     }
 
     .icon-btn:hover {
@@ -191,11 +219,17 @@
 
     .objeto-texto {
       flex: 1;
+      min-width: 0;
+      line-height: 1.45;
     }
 
     .objeto-icons {
       white-space: nowrap;
       margin-left: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
     }
 
     footer {
@@ -234,6 +268,24 @@
       cursor: pointer;
       color: #444;
     }
+
+    @media (max-width: 900px) {
+      .tooltip .tooltip-text {
+        width: 280px;
+        max-width: 280px;
+        left: 50%;
+        top: calc(100% + 10px);
+        transform: translateX(-50%);
+      }
+
+      .tooltip .tooltip-text::before {
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 7px;
+        border-color: transparent transparent #111827 transparent;
+      }
+    }
   </style>
 </head>
 <body>
@@ -256,152 +308,100 @@
     <div class="card">
       <h2>Tabla de iniciativas</h2>
 
-      <table>
-        <thead>
-          <tr>
-            <th class="col-numero">N°</th>
-            <th class="col-info">Info</th>
-            <th class="col-objeto">Objeto del proyecto</th>
-            <th>Impacto</th>
-            <th>Probabilidad</th>
-            <th>Riesgo</th>
-            <th class="col-links">Links</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-numero">N°</th>
+              <th class="col-info">Info</th>
+              <th class="col-objeto">Objeto del proyecto</th>
+              <th>Impacto</th>
+              <th>Probabilidad</th>
+              <th>Riesgo</th>
+              <th class="col-links">Links</th>
+            </tr>
+          </thead>
+          <tbody>
 
-          <!-- FILA 1 -->
-          <tr>
-            <td class="col-numero">1</td>
+            <!-- FILA 1 -->
+            <tr>
+              <td class="col-numero">1</td>
 
-            <td class="col-info">
-              <span class="tooltip icon-btn">
-                ℹ
-                <span class="tooltip-text">
-                  3377
+              <td class="col-info">
+                <span class="tooltip icon-btn">
+                  ℹ
+                  <span class="tooltip-text">3377
 20-10-2022
-Congresistas Salhuana Cavides, Chiabra León, Julón Irigoín, García Correa, Torres Salinas, y Trigozo Reátegui, del Grupo Parlamentario Alianza Para el Progreso.
-.
+Congresistas Salhuana Cavides, Chiabra León, Julón Irigoín, García Correa, Torres Salinas y Trigozo Reátegui, del Grupo Parlamentario Alianza Para el Progreso.</span>
                 </span>
-              </span>
-            </td>
+              </td>
 
-            <td>
-              <div class="objeto-wrap">
-                <div class="objeto-texto">
-                  Ley que establece el régimen de presentación de petitorios y otorgamiento de concesión minera en zonas de pequeña minería y minería artesanal de Madre de Dios comprendidas en el Anexo 1 del Decreto Legislativo 1100.
-                </div>
+              <td>
+                <div class="objeto-wrap">
+                  <div class="objeto-texto">
+                    Ley que establece el régimen de presentación de petitorios y otorgamiento de concesión minera en zonas de pequeña minería y minería artesanal de Madre de Dios comprendidas en el Anexo 1 del Decreto Legislativo 1100.
+                  </div>
 
-                <div class="objeto-icons">
-                  <span class="tooltip icon-btn">
-                    👁
-                    <span class="tooltip-text">
-                      Escribe aquí la información editable del ícono ojo para esta fila.
+                  <div class="objeto-icons">
+                    <span class="tooltip icon-btn">
+                      👁
+                      <span class="tooltip-text">Escribe aquí la información editable del ícono ojo para esta fila.</span>
                     </span>
-                  </span>
 
-                  <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
-                  <a href="https://www.gob.pe/" target="_blank" class="icon-btn" title="Link 2">📄</a>
+                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
+                    <a href="https://www.gob.pe/" target="_blank" class="icon-btn" title="Link 2">📄</a>
+                  </div>
                 </div>
-              </div>
-            </td>
+              </td>
 
-            <td><span class="badge importante">IMPORTANTE</span></td>
-            <td><span class="badge muy-probable">MUY PROBABLE</span></td>
-            <td><span class="badge neutro">NEUTRO</span></td>
-            <td class="col-links">
-              <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
-              <a href="https://www.gob.pe/" target="_blank" class="icon-btn" title="Documento">📄</a>
-            </td>
-          </tr>
+              <td><span class="badge importante">IMPORTANTE</span></td>
+              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+              <td><span class="badge neutro">NEUTRO</span></td>
+              <td class="col-links">
+                <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
+                <a href="https://www.gob.pe/" target="_blank" class="icon-btn" title="Documento">📄</a>
+              </td>
+            </tr>
 
-          <!-- FILA 2 -->
-          <tr>
-            <td class="col-numero">2</td>
+            <!-- FILA 2 -->
+            <tr>
+              <td class="col-numero">2</td>
 
-            <td class="col-info">
-              <span class="tooltip icon-btn">
-                ℹ
-                <span class="tooltip-text">
-                  Escribe aquí la información editable de esta segunda fila.
+              <td class="col-info">
+                <span class="tooltip icon-btn">
+                  ℹ
+                  <span class="tooltip-text">Escribe aquí la información editable de esta segunda fila.</span>
                 </span>
-              </span>
-            </td>
+              </td>
 
-            <td>
-              <div class="objeto-wrap">
-                <div class="objeto-texto">
-                  Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado por Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones mineras y evitar la existencia de concesiones ociosas.
-                </div>
+              <td>
+                <div class="objeto-wrap">
+                  <div class="objeto-texto">
+                    Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado por Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones mineras y evitar la existencia de concesiones ociosas.
+                  </div>
 
-                <div class="objeto-icons">
-                  <span class="tooltip icon-btn">
-                    👁
-                    <span class="tooltip-text">
-                      Escribe aquí la información del ojo para la segunda fila.
+                  <div class="objeto-icons">
+                    <span class="tooltip icon-btn">
+                      👁
+                      <span class="tooltip-text">Escribe aquí la información del ojo para la segunda fila.</span>
                     </span>
-                  </span>
 
-                  <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
+                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
+                  </div>
                 </div>
-              </div>
-            </td>
+              </td>
 
-            <td><span class="badge importante">IMPORTANTE</span></td>
-            <td><span class="badge muy-probable">MUY PROBABLE</span></td>
-            <td><span class="badge neutro">NEUTRO</span></td>
-            <td class="col-links">
-              <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
-            </td>
-          </tr>
+              <td><span class="badge importante">IMPORTANTE</span></td>
+              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+              <td><span class="badge neutro">NEUTRO</span></td>
+              <td class="col-links">
+                <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
+              </td>
+            </tr>
 
-          <!--
-          MODELO PARA NUEVAS FILAS
-
-          <tr>
-            <td class="col-numero">3</td>
-
-            <td class="col-info">
-              <span class="tooltip icon-btn">
-                ℹ
-                <span class="tooltip-text">
-                  Escribe aquí la información editable de esta fila.
-                </span>
-              </span>
-            </td>
-
-            <td>
-              <div class="objeto-wrap">
-                <div class="objeto-texto">
-                  Escribe aquí el objeto del proyecto.
-                </div>
-
-                <div class="objeto-icons">
-                  <span class="tooltip icon-btn">
-                    👁
-                    <span class="tooltip-text">
-                      Escribe aquí la información del ojo para esta fila.
-                    </span>
-                  </span>
-
-                  <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
-                  <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Link 2">📄</a>
-                </div>
-              </div>
-            </td>
-
-            <td><span class="badge importante">IMPORTANTE</span></td>
-            <td><span class="badge muy-probable">MUY PROBABLE</span></td>
-            <td><span class="badge neutro">NEUTRO</span></td>
-            <td class="col-links">
-              <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Proyecto">🔗</a>
-              <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Documento">📄</a>
-            </td>
-          </tr>
-          -->
-
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>
