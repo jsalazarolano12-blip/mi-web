@@ -38,6 +38,7 @@
       width: 92%;
       max-width: 1200px;
       margin: 30px auto;
+      overflow: visible;
     }
 
     .card {
@@ -46,6 +47,7 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
       padding: 20px;
       margin-bottom: 25px;
+      overflow: visible;
     }
 
     .intro {
@@ -69,6 +71,8 @@
 
     .table-wrap {
       overflow-x: auto;
+      overflow-y: visible;
+      border-radius: 12px;
     }
 
     table {
@@ -77,7 +81,7 @@
       margin-top: 15px;
       background: white;
       border-radius: 12px;
-      overflow: hidden;
+      overflow: visible;
     }
 
     th,
@@ -90,8 +94,8 @@
     }
 
     th {
-      background: #000;
-      color: #fff;
+      background: #000000;
+      color: #ffffff;
       white-space: nowrap;
     }
 
@@ -143,6 +147,55 @@
       background: #6b7280;
     }
 
+    .tooltip {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      position: absolute;
+      z-index: 9999;
+      bottom: 135%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      max-width: 260px;
+      background: #6b7280;
+      color: #ffffff;
+      text-align: left;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.45;
+      white-space: normal;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: #6b7280 transparent transparent transparent;
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
     .icon-btn {
       display: inline-flex;
       align-items: center;
@@ -156,8 +209,6 @@
       margin: 0 2px;
       text-decoration: none;
       vertical-align: middle;
-      border: none;
-      cursor: pointer;
       flex-shrink: 0;
     }
 
@@ -202,42 +253,26 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.55);
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.5);
     }
 
     .popup-content {
       background: white;
-      width: 92%;
-      max-width: 700px;
-      margin: 5% auto;
-      padding: 22px;
-      border-radius: 14px;
+      width: 90%;
+      max-width: 500px;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
       position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      max-height: 80vh;
-      overflow-y: auto;
     }
 
     .close {
       position: absolute;
-      right: 14px;
-      top: 8px;
-      font-size: 26px;
+      right: 15px;
+      top: 10px;
+      font-size: 24px;
       cursor: pointer;
       color: #444;
-    }
-
-    .popup-content h3 {
-      margin-top: 0;
-      margin-bottom: 14px;
-      color: #0f172a;
-    }
-
-    .popup-content p {
-      line-height: 1.6;
-      white-space: pre-wrap;
-      margin: 0;
     }
   </style>
 </head>
@@ -254,7 +289,7 @@
         Esta web resume las iniciativas legislativas identificadas sobre concesiones mineras,
         considerando su objeto, impacto, probabilidad en el periodo y nivel de riesgo.
       </p>
-      <button class="btn" onclick="abrirPopupResumen()">Ver resumen general</button>
+      <button class="btn" onclick="abrirPopup()">Ver resumen general</button>
     </div>
 
     <div class="card">
@@ -279,29 +314,34 @@
               <td class="col-numero">1</td>
 
               <td class="col-info">
-                <button
-                  class="icon-btn"
-                  onclick="abrirPopupTexto('Información de la fila 1', '3377 - 20-10-2022.\nCongresistas Salhuana Cavides, Chiabra León, Julón Irigoin, García Correa, Torres Salinas y Trigozo Reátegui, del Grupo Parlamentario Alianza Para el Progreso.')"
-                  title="Ver información"
-                >
+                <span class="tooltip icon-btn">
                   ℹ
-                </button>
+                  <span class="tooltip-text">
+                    3377 20-10-2022. Congresistas Salhuana Cavides, Chiabra León, Julón Irigoin,
+                    García Correa, Torres Salinas y Trigozo Reátegui, del Grupo Parlamentario
+                    Alianza Para el Progreso.
+                  </span>
+                </span>
               </td>
 
               <td>
                 <div class="objeto-wrap">
                   <div class="objeto-texto">
-                    Ley que establece el régimen de presentación de petitorios y otorgamiento de concesión minera en zonas de pequeña minería y minería artesanal de Madre de Dios comprendidas en el Anexo 1 del Decreto Legislativo 1100.
+                    Ley que establece el régimen de presentación de petitorios y otorgamiento de
+                    concesión minera en zonas de pequeña minería y minería artesanal de Madre de Dios
+                    comprendidas en el Anexo 1 del Decreto Legislativo 1100.
                   </div>
 
                   <div class="objeto-icons">
-                    <button
-                      class="icon-btn"
-                      onclick="abrirPopupTexto('Notas:', 'El 06-06-2024 la Comisión de Energía y Minas (comisión principal) presentó dictamen en mayoría, con una fórmula sustitutoria.\n\nEl 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con una fórmula sustitutoria.\n\nSe encuentra para el debate en la agenda del Pleno del Congreso.')"
-                      title="Ver detalle"
-                    >
+                    <span class="tooltip icon-btn">
                       👁
-                    </button>
+                      <span class="tooltip-text">
+                        El 06-06-2024 la Comisión de Energía y Minas (comisión principal) presentó
+                        dictamen en mayoría, con una fórmula sustitutoria. El 02-12-2024 la Comisión
+                        de Pueblos Andinos presentó dictamen en mayoría con una fórmula sustitutoria.
+                        Se encuentra para el debate en la agenda del Pleno del Congreso.
+                      </span>
+                    </span>
 
                     <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MTkzMTkx/pdf" target="_blank" class="icon-btn" title="Documento 1">📄</a>
                     <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MjM4MzI4/pdf" target="_blank" class="icon-btn" title="Documento 2">📄</a>
@@ -322,33 +362,29 @@
               <td class="col-numero">2</td>
 
               <td class="col-info">
-                <button
-                  class="icon-btn"
-                  onclick="abrirPopupTexto('Notas', '8853 (09-09-2024)Congresista Muñante Barrios, del Grupo Parlamentario Renovación Popular.9386 (31-10-2024)Congresista Dávila Atanacio, del Grupo Parlamentario Bancada Socialista.10610 (24-03-2025)
-Congresista Martínez Talavera, del Grupo Parlamentario Acción Popular.11045 (07-05-2025) Congresista Gutiérrez Ticona, del Grupo Parlamentario, Bloque Magisterial. 12273 (02-09-2025)Congresista Sánchez Palomino, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.
-12708 y 12730 (09-10-2025)Congresista Bellido Ugarte, del Grupo Parlamentario Podemos Perú.
-13481 (04-12-2025)Congresista Quispe Mamani, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.
-13497 (05-12-2025)Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.')"
-                  title="Ver información"
-                >
+                <span class="tooltip icon-btn">
                   ℹ
-                </button>
+                  <span class="tooltip-text">
+                    Escribe aquí la información editable de esta segunda fila.
+                  </span>
+                </span>
               </td>
 
               <td>
                 <div class="objeto-wrap">
                   <div class="objeto-texto">
-                    Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado por Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones mineras y evitar la existencia de concesiones ociosas.
+                    Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado
+                    por Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones
+                    mineras y evitar la existencia de concesiones ociosas.
                   </div>
 
                   <div class="objeto-icons">
-                    <button
-                      class="icon-btn"
-                      onclick="abrirPopupTexto('Notas', 'El predictamen se encuentra en la agenda de la sesión de la Comisión de Energía y Minas, de hoy, martes 17 de marzo de 2026.')"
-                      title="Ver detalle"
-                    >
+                    <span class="tooltip icon-btn">
                       👁
-                    </button>
+                      <span class="tooltip-text">
+                        Escribe aquí la información del ojo para la segunda fila.
+                      </span>
+                    </span>
 
                     <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">🔗</a>
                   </div>
@@ -368,13 +404,12 @@ Congresista Martínez Talavera, del Grupo Parlamentario Acción Popular.11045 (0
               <td class="col-numero">3</td>
 
               <td class="col-info">
-                <button
-                  class="icon-btn"
-                  onclick="abrirPopupTexto('Información de la fila 3', 'Escribe aquí la información editable de esta fila.')"
-                  title="Ver información"
-                >
+                <span class="tooltip icon-btn">
                   ℹ
-                </button>
+                  <span class="tooltip-text">
+                    Escribe aquí la información editable de esta fila.
+                  </span>
+                </span>
               </td>
 
               <td>
@@ -384,13 +419,12 @@ Congresista Martínez Talavera, del Grupo Parlamentario Acción Popular.11045 (0
                   </div>
 
                   <div class="objeto-icons">
-                    <button
-                      class="icon-btn"
-                      onclick="abrirPopupTexto('Detalle del proyecto 3', 'Escribe aquí la información del ojo para esta fila.')"
-                      title="Ver detalle"
-                    >
+                    <span class="tooltip icon-btn">
                       👁
-                    </button>
+                      <span class="tooltip-text">
+                        Escribe aquí la información del ojo para esta fila.
+                      </span>
+                    </span>
 
                     <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Documento 1">📄</a>
                     <a href="https://www.ejemplo.com/" target="_blank" class="icon-btn" title="Documento 2">📄</a>
@@ -414,21 +448,14 @@ Congresista Martínez Talavera, del Grupo Parlamentario Acción Popular.11045 (0
     </div>
   </div>
 
-  <div id="popupResumen" class="popup">
+  <div id="miPopup" class="popup">
     <div class="popup-content">
-      <span class="close" onclick="cerrarPopupResumen()">&times;</span>
+      <span class="close" onclick="cerrarPopup()">&times;</span>
       <h3>Resumen general</h3>
       <p>
-El PPT presenta riesgos legislativos vinculados a concesiones mineras. Ambas iniciativas son consideradas de impacto importante, muy probables en el periodo y con riesgo neutro.
+        El PPT presenta riesgos legislativos vinculados a concesiones mineras. Ambas iniciativas
+        son consideradas de impacto importante, muy probables en el periodo y con riesgo neutro.
       </p>
-    </div>
-  </div>
-
-  <div id="popupTexto" class="popup">
-    <div class="popup-content">
-      <span class="close" onclick="cerrarPopupTexto()">&times;</span>
-      <h3 id="popupTextoTitulo">Detalle</h3>
-      <p id="popupTextoContenido"></p>
     </div>
   </div>
 
@@ -437,34 +464,18 @@ El PPT presenta riesgos legislativos vinculados a concesiones mineras. Ambas ini
   </footer>
 
   <script>
-    function abrirPopupResumen() {
-      document.getElementById("popupResumen").style.display = "block";
+    function abrirPopup() {
+      document.getElementById("miPopup").style.display = "block";
     }
 
-    function cerrarPopupResumen() {
-      document.getElementById("popupResumen").style.display = "none";
-    }
-
-    function abrirPopupTexto(titulo, contenido) {
-      document.getElementById("popupTextoTitulo").innerText = titulo;
-      document.getElementById("popupTextoContenido").innerText = contenido;
-      document.getElementById("popupTexto").style.display = "block";
-    }
-
-    function cerrarPopupTexto() {
-      document.getElementById("popupTexto").style.display = "none";
+    function cerrarPopup() {
+      document.getElementById("miPopup").style.display = "none";
     }
 
     window.onclick = function(event) {
-      const popupResumen = document.getElementById("popupResumen");
-      const popupTexto = document.getElementById("popupTexto");
-
-      if (event.target === popupResumen) {
-        popupResumen.style.display = "none";
-      }
-
-      if (event.target === popupTexto) {
-        popupTexto.style.display = "none";
+      const popup = document.getElementById("miPopup");
+      if (event.target === popup) {
+        popup.style.display = "none";
       }
     };
   </script>
