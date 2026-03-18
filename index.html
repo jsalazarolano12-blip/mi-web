@@ -46,6 +46,7 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
       padding: 20px;
       margin-bottom: 25px;
+      overflow: visible;
     }
 
     .intro {
@@ -70,6 +71,7 @@
     .table-wrap {
       width: 100%;
       overflow-x: auto;
+      overflow-y: visible;
       border-radius: 12px;
     }
 
@@ -79,7 +81,7 @@
       margin-top: 15px;
       background: white;
       border-radius: 12px;
-      overflow: visible; /* CAMBIO IMPORTANTE */
+      overflow: visible;
     }
 
     th, td {
@@ -88,7 +90,7 @@
       text-align: left;
       vertical-align: top;
       font-size: 14px;
-      overflow: visible; /* CAMBIO IMPORTANTE */
+      overflow: visible;
     }
 
     th {
@@ -154,22 +156,22 @@
       visibility: hidden;
       opacity: 0;
       transition: opacity 0.2s ease;
-      width: 340px;
-      max-width: 340px;
+      width: 380px;
+      max-width: 380px;
       background: #111827;
       color: #fff;
       text-align: left;
       border-radius: 10px;
       padding: 12px 14px;
       position: absolute;
-      z-index: 9999;
-      top: 50%;
-      left: calc(100% + 12px);
-      transform: translateY(-50%);
+      z-index: 99999;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 12px;
       line-height: 1.5;
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      white-space: pre-line; /* RESPETA SALTOS DE LÍNEA */
+      white-space: pre-line;
       word-break: break-word;
       pointer-events: none;
     }
@@ -182,12 +184,12 @@
     .tooltip .tooltip-text::before {
       content: "";
       position: absolute;
-      top: 50%;
-      left: -7px;
-      transform: translateY(-50%);
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
       border-width: 7px;
       border-style: solid;
-      border-color: transparent #111827 transparent transparent;
+      border-color: #111827 transparent transparent transparent;
     }
 
     .icon-btn {
@@ -275,6 +277,7 @@
         max-width: 280px;
         left: 50%;
         top: calc(100% + 10px);
+        bottom: auto;
         transform: translateX(-50%);
       }
 
@@ -283,7 +286,17 @@
         left: 50%;
         transform: translateX(-50%);
         border-width: 7px;
+        border-style: solid;
         border-color: transparent transparent #111827 transparent;
+      }
+
+      .objeto-wrap {
+        flex-direction: column;
+      }
+
+      .objeto-icons {
+        margin-left: 0;
+        margin-top: 8px;
       }
     }
   </style>
@@ -345,9 +358,9 @@ Congresistas Salhuana Cavides, Chiabra León, Julón Irigoín, García Correa, T
                     <span class="tooltip icon-btn">
                       👁
                       <span class="tooltip-text">El 06-06-2024 la Comisión de Energía y Minas (comisión principal) presentó dictamen en mayoría, con una fórmula sustitutoria.
-                      El 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con una formula sustitutoria.
-                      
-                      <b>SE ENCUENTRA PARA EL DEBATE EN LA AGENDA DEL PLENO DEL CONGRESO.</b></span>
+El 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con una formula sustitutoria.
+
+<b>SE ENCUENTRA PARA EL DEBATE EN LA AGENDA DEL PLENO DEL CONGRESO.</b></span>
                     </span>
 
                     <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MTkzMTkx/pdf" target="_blank" class="icon-btn" title="Dictamen Energia y Minas">📄</a>
@@ -394,8 +407,7 @@ Congresista Bellido Ugarte, del Grupo Parlamentario Podemos Perú.
 Congresista Quispe Mamani, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.
 
 13497 (05-12-2025)
-Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.
-</span>
+Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
                 </span>
               </td>
 
