@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riesgos Legislativos - Concesiones Mineras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #1f2937;
+    }
+
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .intro {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: white;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #1d4ed8;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .importante {
+      background: #d97706;
+    }
+
+    .muy-probable {
+      background: #2563eb;
+    }
+
+    .neutro {
+      background: #6b7280;
+    }
+
+    .btn {
+      background: #0f766e;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background: #115e59;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .popup-content {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Riesgos Legislativos en Temas de Concesiones Mineras</h1>
+    <p>Consultoría para el seguimiento de iniciativas legislativas en el Congreso de la República del Perú</p>
+  </header>
+
+  <div class="container">
+
+    <div class="card intro">
+      <p>
+        Esta web resume las iniciativas legislativas identificadas sobre concesiones mineras,
+        considerando su objeto, impacto, probabilidad en el periodo y nivel de riesgo.
+      </p>
+      <button class="btn" onclick="abrirPopup()">Ver resumen general</button>
+    </div>
+
+    <div class="card">
+      <h2>Tabla de iniciativas</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Objeto del proyecto</th>
+            <th>Impacto</th>
+            <th>Probabilidad</th>
+            <th>Riesgo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Ley que establece el régimen de presentación de petitorios y otorgamiento de concesión minera
+              en zonas de pequeña minería y minería artesanal de Madre de Dios comprendidas en el Anexo 1
+              del Decreto Legislativo 1100.
+            </td>
+            <td><span class="badge importante">IMPORTANTE</span></td>
+            <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+            <td><span class="badge neutro">NEUTRO</span></td>
+          </tr>
+          <tr>
+            <td>
+              Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado por
+              Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones mineras
+              y evitar la existencia de concesiones ociosas.
+            </td>
+            <td><span class="badge importante">IMPORTANTE</span></td>
+            <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+            <td><span class="badge neutro">NEUTRO</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div id="miPopup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="cerrarPopup()">&times;</span>
+      <h3>Resumen general</h3>
+      <p>
+        El PPT presenta riesgos legislativos vinculados a concesiones mineras. Ambas iniciativas
+        son consideradas de impacto importante, muy probables en el periodo y con riesgo neutro.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    Página web basada en la presentación de riesgos legislativos sobre concesiones mineras.
+  </footer>
+
+  <script>
+    function abrirPopup() {
+      document.getElementById("miPopup").style.display = "block";
+    }
+
+    function cerrarPopup() {
+      document.getElementById("miPopup").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const popup = document.getElementById("miPopup");
+      if (event.target === popup) {
+        popup.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
