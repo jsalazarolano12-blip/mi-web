@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Riesgos Legislativos - Concesiones Mineras</title>
-
   <style>
     * {
       box-sizing: border-box;
@@ -130,9 +129,17 @@
       white-space: nowrap;
     }
 
-    .importante { background: #d97706; }
-    .muy-probable { background: #2563eb; }
-    .neutro { background: #6b7280; }
+    .importante {
+      background: #d97706;
+    }
+
+    .muy-probable {
+      background: #2563eb;
+    }
+
+    .neutro {
+      background: #6b7280;
+    }
 
     .tooltip {
       position: relative;
@@ -140,28 +147,25 @@
       cursor: pointer;
     }
 
-    /* 🔥 SOLO ESTO CAMBIÓ */
+    /* SOLO SE MODIFICA ESTE BLOQUE PARA QUE EL TOOLTIP NO SE CORTE */
     .tooltip .tooltip-text {
       visibility: hidden;
       opacity: 0;
       transition: opacity 0.2s ease;
-
       width: 380px;
-      max-width: 380px;
-
+      max-width: min(380px, calc(100vw - 24px));
       background: #111827;
       color: #fff;
       text-align: left;
       border-radius: 10px;
       padding: 12px 14px;
-
-      position: fixed; /* 🔥 CAMBIO CLAVE */
-
+      position: fixed; /* antes: absolute */
       z-index: 99999;
-
+      top: 0;
+      left: 0;
+      transform: none; /* antes: translateX(-50%) */
       font-size: 12px;
       line-height: 1.5;
-
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
       white-space: pre-line;
       word-break: break-word;
@@ -171,6 +175,19 @@
     .tooltip:hover .tooltip-text {
       visibility: visible;
       opacity: 1;
+    }
+
+    /* Flecha oculta para evitar desajuste al usar position: fixed */
+    .tooltip .tooltip-text::before {
+      display: none;
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 7px;
+      border-style: solid;
+      border-color: #111827 transparent transparent transparent;
     }
 
     .icon-btn {
@@ -251,93 +268,240 @@
       cursor: pointer;
       color: #444;
     }
+
+    @media (max-width: 900px) {
+      .tooltip .tooltip-text {
+        width: min(280px, calc(100vw - 24px));
+        max-width: calc(100vw - 24px);
+      }
+
+      .objeto-wrap {
+        flex-direction: column;
+      }
+
+      .objeto-icons {
+        margin-left: 0;
+        margin-top: 8px;
+      }
+    }
   </style>
 </head>
-
 <body>
 
-<header>
-  <h1>Riesgos Legislativos en Temas de Concesiones Mineras</h1>
-  <p>Consultoría para el seguimiento de iniciativas legislativas en el Congreso de la República del Perú</p>
-</header>
+  <header>
+    <h1>Riesgos Legislativos en Temas de Concesiones Mineras</h1>
+    <p>Consultoría para el seguimiento de iniciativas legislativas en el Congreso de la República del Perú</p>
+  </header>
 
-<div class="container">
+  <div class="container">
 
-  <div class="card intro">
-    <p>
-      Esta web resume las iniciativas legislativas identificadas sobre concesiones mineras,
-      considerando su objeto, impacto, probabilidad en el periodo y nivel de riesgo.
-    </p>
-    <button class="btn" onclick="abrirPopup()">Ver resumen general</button>
+    <div class="card intro">
+      <p>
+        Esta web resume las iniciativas legislativas identificadas sobre concesiones mineras,
+        considerando su objeto, impacto, probabilidad en el periodo y nivel de riesgo.
+      </p>
+      <button class="btn" onclick="abrirPopup()">Ver resumen general</button>
+    </div>
+
+    <div class="card">
+      <h2>Tabla de iniciativas</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-numero">N°</th>
+              <th class="col-info">Info</th>
+              <th class="col-objeto">Objeto del proyecto</th>
+              <th>Impacto</th>
+              <th>Probabilidad</th>
+              <th>Riesgo</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- FILA 1 -->
+            <tr>
+              <td class="col-numero">1</td>
+
+              <td class="col-info">
+                <span class="tooltip icon-btn">
+                  ℹ
+                  <span class="tooltip-text"><b>3377</b> (20-10-2022)
+Congresistas Salhuana Cavides, Chiabra León, Julón Irigoín, García Correa, Torres Salinas y Trigozo Reátegui, del Grupo Parlamentario Alianza Para el Progreso.</span>
+                </span>
+              </td>
+
+              <td>
+                <div class="objeto-wrap">
+                  <div class="objeto-texto">
+                    Ley que establece el régimen de presentación de petitorios y otorgamiento de concesión minera en zonas de pequeña minería y minería artesanal de Madre de Dios comprendidas en el Anexo 1 del Decreto Legislativo 1100.
+                  </div>
+
+                  <div class="objeto-icons">
+                    <span class="tooltip icon-btn">
+                      👁
+                      <span class="tooltip-text">El 06-06-2024 la Comisión de Energía y Minas (comisión principal) presentó dictamen en mayoría, con una fórmula sustitutoria.
+El 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con una formula sustitutoria.
+
+<b>SE ENCUENTRA PARA EL DEBATE EN LA AGENDA DEL PLENO DEL CONGRESO.</b></span>
+                    </span>
+
+                    <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MTkzMTkx/pdf" target="_blank" class="icon-btn" title="Dictamen Energia y Minas">📄</a>
+                    <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MjM4MzI4/pdf" target="_blank" class="icon-btn" title="Dictamen Pueblos Andinos">📄</a>
+                  </div>
+                </div>
+              </td>
+
+              <td><span class="badge importante">IMPORTANTE</span></td>
+              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+              <td><span class="badge neutro">NEUTRO</span></td>
+            </tr>
+
+            <!-- FILA 2 -->
+            <tr>
+              <td class="col-numero">2</td>
+
+              <td class="col-info">
+                <span class="tooltip icon-btn">
+                  ℹ
+                  <span class="tooltip-text">8853 (09-09-2024)
+Congresista Muñante Barrios, del Grupo Parlamentario Renovación Popular.
+
+9386 (31-10-2024)
+Congresista Dávila Atanacio, del Grupo Parlamentario Bancada Socialista.
+
+10610 (24-03-2025)
+Congresista Martínez Talavera, del Grupo Parlamentario Acción Popular.
+
+11045 (07-05-2025)
+Congresista Gutiérrez Ticona, del Grupo Parlamentario, Bloque Magisterial.
+
+12273 (02-09-2025)
+Congresista Sánchez Palomino, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.
+
+12708 y 12730 (09-10-2025)
+Congresista Bellido Ugarte, del Grupo Parlamentario Podemos Perú.
+
+13481 (04-12-2025)
+Congresista Quispe Mamani, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.
+
+13497 (05-12-2025)
+Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
+                </span>
+              </td>
+
+              <td>
+                <div class="objeto-wrap">
+                  <div class="objeto-texto">
+                    Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado por Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones mineras y evitar la existencia de concesiones ociosas.
+                  </div>
+
+                  <div class="objeto-icons">
+                    <span class="tooltip icon-btn">
+                      👁
+                      <span class="tooltip-text">El predictamen se encuentra en la agenda de la sesión de la Comisión de Energía y Minas, de hoy, martes 17 de marzo de 2026.</span>
+                    </span>
+
+                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">📄</a>
+                  </div>
+                </div>
+              </td>
+
+              <td><span class="badge importante">IMPORTANTE</span></td>
+              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
+              <td><span class="badge neutro">NEUTRO</span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h2>Tabla de iniciativas</h2>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th class="col-numero">N°</th>
-            <th class="col-info">Info</th>
-            <th class="col-objeto">Objeto del proyecto</th>
-            <th>Impacto</th>
-            <th>Probabilidad</th>
-            <th>Riesgo</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <!-- TUS FILAS SE MANTIENEN IGUAL -->
-        </tbody>
-
-      </table>
+  <div id="miPopup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="cerrarPopup()">&times;</span>
+      <h3>Resumen general</h3>
+      <p>
+        El PPT presenta riesgos legislativos vinculados a concesiones mineras. Ambas iniciativas
+        son consideradas de impacto importante, muy probables en el periodo y con riesgo neutro.
+      </p>
     </div>
   </div>
 
-</div>
+  <footer>
+    Página web basada en la presentación de riesgos legislativos sobre concesiones mineras.
+  </footer>
 
-<div id="miPopup" class="popup">
-  <div class="popup-content">
-    <span class="close" onclick="cerrarPopup()">&times;</span>
-    <h3>Resumen general</h3>
-    <p>
-      El PPT presenta riesgos legislativos vinculados a concesiones mineras.
-    </p>
-  </div>
-</div>
+  <script>
+    function abrirPopup() {
+      document.getElementById("miPopup").style.display = "block";
+    }
 
-<footer>
-  Página web basada en la presentación de riesgos legislativos sobre concesiones mineras.
-</footer>
+    function cerrarPopup() {
+      document.getElementById("miPopup").style.display = "none";
+    }
 
-<script>
-function abrirPopup() {
-  document.getElementById("miPopup").style.display = "block";
-}
+    window.onclick = function(event) {
+      const popup = document.getElementById("miPopup");
+      if (event.target === popup) {
+        popup.style.display = "none";
+      }
+    }
 
-function cerrarPopup() {
-  document.getElementById("miPopup").style.display = "none";
-}
+    /* SOLO SE AGREGA ESTO PARA QUE EL TOOLTIP NO SE CORTE */
+    document.querySelectorAll('.tooltip').forEach(function(tooltipWrapper) {
+      const trigger = tooltipWrapper;
+      const tooltip = tooltipWrapper.querySelector('.tooltip-text');
 
-window.onclick = function(event) {
-  const popup = document.getElementById("miPopup");
-  if (event.target === popup) {
-    popup.style.display = "none";
-  }
-}
+      if (!tooltip) return;
 
-/* 🔥 SOLO ESTO SE AGREGÓ */
-document.querySelectorAll('.tooltip').forEach(t => {
-  const icon = t.querySelector('.icon-btn');
-  const tooltip = t.querySelector('.tooltip-text');
+      function posicionarTooltip(e) {
+        const margen = 12;
+        const anchoTooltip = tooltip.offsetWidth || 380;
+        const altoTooltip = tooltip.offsetHeight || 120;
 
-  icon.addEventListener('mousemove', (e) => {
-    tooltip.style.left = (e.clientX + 15) + 'px';
-    tooltip.style.top = (e.clientY + 15) + 'px';
-  });
-});
-</script>
+        let left = e.clientX + 16;
+        let top = e.clientY - altoTooltip - 16;
+
+        if (left + anchoTooltip > window.innerWidth - margen) {
+          left = window.innerWidth - anchoTooltip - margen;
+        }
+
+        if (left < margen) {
+          left = margen;
+        }
+
+        if (top < margen) {
+          top = e.clientY + 16;
+        }
+
+        if (top + altoTooltip > window.innerHeight - margen) {
+          top = window.innerHeight - altoTooltip - margen;
+        }
+
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+      }
+
+      trigger.addEventListener('mouseenter', function(e) {
+        tooltip.style.visibility = 'visible';
+        tooltip.style.opacity = '1';
+        posicionarTooltip(e);
+      });
+
+      trigger.addEventListener('mousemove', function(e) {
+        posicionarTooltip(e);
+      });
+
+      trigger.addEventListener('mouseleave', function() {
+        tooltip.style.visibility = 'hidden';
+        tooltip.style.opacity = '0';
+      });
+    });
+  </script>
 
 </body>
 </html>
