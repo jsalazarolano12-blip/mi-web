@@ -21,6 +21,21 @@
       color: white;
       padding: 30px 20px;
       text-align: center;
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.header-text {
+  max-width: 80%;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+      
     }
 
     header h1 {
@@ -297,9 +312,13 @@
 </head>
 <body>
 
-  <header>
+  <header class="header-flex">
+  <div class="header-text">
     <h1>Riesgos Legislativos en Temas de Concesiones Mineras</h1>
     <p>Consultoría para el seguimiento de iniciativas legislativas en el Congreso de la República del Perú</p>
+  </div>
+
+  <img src="logo.JPG" alt="Logo" class="logo">
   </header>
 
   <div class="container">
