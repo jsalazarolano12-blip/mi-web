@@ -16,17 +16,17 @@
       color: #1f2937;
     }
 
-header {
-  background: white;
-  padding: 25px 0;
-  text-align: center;
-  border-bottom: 1px solid #e5e7eb;
-}
+    header {
+      background: white;
+      padding: 25px 0;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
 
-.logo {
-  height: 80px; /* tamaño del logo */
-  width: auto;
-}
+    .logo-centro {
+      height: 80px;
+      width: auto;
+    }
 
     .container {
       width: 92%;
@@ -41,25 +41,6 @@ header {
       padding: 20px;
       margin-bottom: 25px;
       overflow: visible;
-    }
-
-    .intro {
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    .btn {
-      background: #0f766e;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .btn:hover {
-      background: #115e59;
     }
 
     .table-wrap {
@@ -88,8 +69,8 @@ header {
     }
 
     th {
-  background: #cbbfa8; /* beige más elegante */
-  color: #111827;
+      background: #cbbfa8;
+      color: #111827;
     }
 
     tr:nth-child(even) {
@@ -134,63 +115,44 @@ header {
     .neutro {
       background: #6b7280;
     }
+
     .riesgo-alto {
-      background: #dc2626; /* rojo */
+      background: #dc2626;
       color: white;
     }
 
     .riesgo-bajo {
-      background: #16a34a; /* verde */
+      background: #16a34a;
       color: white;
     }
 
     .tooltip {
       position: relative;
-      display: inline-block;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
     }
 
-    /* SOLO SE MODIFICA ESTE BLOQUE PARA QUE EL TOOLTIP NO SE CORTE */
     .tooltip .tooltip-text {
       visibility: hidden;
       opacity: 0;
-      transition: opacity 0.2s ease;
-      width: 380px;
-      max-width: min(380px, calc(100vw - 24px));
-      background: #111827;
+      position: fixed;
+      z-index: 99999;
+      width: min(380px, calc(100vw - 24px));
+      max-width: calc(100vw - 24px);
+      background: rgba(17, 24, 39, 0.97);
       color: #fff;
       text-align: left;
-      border-radius: 10px;
       padding: 12px 14px;
-      position: fixed; /* antes: absolute */
-      z-index: 99999;
-      top: 0;
-      left: 0;
-      transform: none; /* antes: translateX(-50%) */
-      font-size: 12px;
+      border-radius: 10px;
+      font-size: 13px;
       line-height: 1.5;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      white-space: pre-line;
-      word-break: break-word;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
       pointer-events: none;
-    }
-
-    .tooltip:hover .tooltip-text {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    /* Flecha oculta para evitar desajuste al usar position: fixed */
-    .tooltip .tooltip-text::before {
-      display: none;
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 7px;
-      border-style: solid;
-      border-color: #111827 transparent transparent transparent;
+      transition: opacity 0.15s ease;
+      white-space: normal;
+      word-break: break-word;
     }
 
     .icon-btn {
@@ -233,6 +195,135 @@ header {
       align-items: center;
       gap: 4px;
       flex-shrink: 0;
+    }
+
+    /* ===== LÍNEA DE TIEMPO HORIZONTAL ===== */
+    .timeline-title {
+      margin-bottom: 8px;
+    }
+
+    .timeline-subtitle {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .timeline-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 15px;
+    }
+
+    .timeline {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      min-width: max-content;
+      padding: 45px 10px 10px 10px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 88px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, #cbbfa8, #d8cfbd);
+      border-radius: 999px;
+    }
+
+    .timeline-item {
+      position: relative;
+      width: 280px;
+      flex: 0 0 280px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 73px;
+      left: 24px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #8b6f47;
+      border: 5px solid #f4f6f8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      z-index: 2;
+    }
+
+    .timeline-date {
+      position: absolute;
+      top: 22px;
+      left: 0;
+      font-size: 13px;
+      font-weight: bold;
+      color: #8b6f47;
+      background: #f7f3ec;
+      border: 1px solid #eadfcd;
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .timeline-card {
+      margin-top: 110px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      min-height: 240px;
+    }
+
+    .timeline-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      color: #111827;
+      line-height: 1.35;
+    }
+
+    .timeline-card p {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #374151;
+    }
+
+    .timeline-image {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      max-height: 140px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #e5e7eb;
+      display: block;
+    }
+
+    .timeline-link {
+      display: inline-block;
+      margin-top: 4px;
+      text-decoration: none;
+      background: #0f766e;
+      color: white;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .timeline-link:hover {
+      background: #115e59;
+    }
+
+    .timeline-empty {
+      color: #9ca3af;
+      font-size: 13px;
+      font-style: italic;
+      margin-top: 8px;
     }
 
     footer {
@@ -286,20 +377,28 @@ header {
         margin-left: 0;
         margin-top: 8px;
       }
+
+      .timeline-item {
+        width: 240px;
+        flex: 0 0 240px;
+      }
+
+      .timeline-card {
+        min-height: 220px;
+      }
     }
   </style>
 </head>
 <body>
 
   <header class="header-logo">
-  <img src="logo.JPG" alt="Logo" class="logo-centro">
+    <img src="logo.JPG" alt="Logo" class="logo-centro">
   </header>
 
   <div class="container">
 
     <div class="card">
-      <h2>RIESGOS LEGISLATIVOS
-      </h2>
+      <h2>RIESGOS LEGISLATIVOS</h2>
 
       <div class="table-wrap">
         <table>
@@ -337,13 +436,12 @@ Congresistas Salhuana Cavides, Chiabra León, Julón Irigoín, García Correa, T
                     <span class="tooltip icon-btn">
                       👁
                       <span class="tooltip-text">El 06-06-2024 la Comisión de Energía y Minas (comisión principal) presentó dictamen en mayoría, con una fórmula sustitutoria.
-El 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con una formula sustitutoria.
+El 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con una fórmula sustitutoria.
 
 <b>SE ENCUENTRA PARA EL DEBATE EN LA AGENDA DEL PLENO DEL CONGRESO.</b></span>
                     </span>
 
-                    <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MTkzMTkx/pdf" target="_blank" class="icon-btn" title="Dictamen Energia y Minas">📄</a>
-                    <a href="https://wb2server.congreso.gob.pe/spley-portal-service/archivo/MjM4MzI4/pdf" target="_blank" class="icon-btn" title="Dictamen Pueblos Andinos">📄</a>
+                    <a href="#" target="_blank" class="icon-btn" title="Documento">📄</a>
                   </div>
                 </div>
               </td>
@@ -360,28 +458,7 @@ El 02-12-2024 la Comisión de Pueblos Andinos presentó dictamen en mayoría con
               <td class="col-info">
                 <span class="tooltip icon-btn">
                   ℹ
-                  <span class="tooltip-text">8853 (09-09-2024)
-Congresista Muñante Barrios, del Grupo Parlamentario Renovación Popular.
-
-9386 (31-10-2024)
-Congresista Dávila Atanacio, del Grupo Parlamentario Bancada Socialista.
-
-10610 (24-03-2025)
-Congresista Martínez Talavera, del Grupo Parlamentario Acción Popular.
-
-11045 (07-05-2025)
-Congresista Gutiérrez Ticona, del Grupo Parlamentario, Bloque Magisterial.
-
-12273 (02-09-2025)
-Congresista Sánchez Palomino, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.
-
-12708 y 12730 (09-10-2025)
-Congresista Bellido Ugarte, del Grupo Parlamentario Podemos Perú.
-
-13481 (04-12-2025)
-Congresista Quispe Mamani, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.
-
-13497 (05-12-2025)
+                  <span class="tooltip-text"><b>13497</b> (05-12-2025)
 Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
                 </span>
               </td>
@@ -395,14 +472,12 @@ Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
                   <div class="objeto-icons">
                     <span class="tooltip icon-btn">
                       👁
-                      <span class="tooltip-text">En la Comisión de Energía y Minas del martes 17 de marzo de 2026 se APROBÓ el dictamen por mayoría.
-                     
-                      A hoy, jueves 19 de marzo, el dictamen aún no tiene firmas. Información directa del secretario técnico de la comisión. Recién desde hoy se recabarán estas.
+                      <span class="tooltip-text">En la Comisión de Energía y Minas del martes 17 de marzo de 2026 se aprobó el dictamen por mayoría.
 
-                      </span>
+A esa fecha, el dictamen aún no contaba con firmas, según información directa de la secretaría técnica de la comisión.</span>
                     </span>
 
-                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">📄</a>
+                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Documento">📄</a>
                   </div>
                 </div>
               </td>
@@ -417,6 +492,99 @@ Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
       </div>
     </div>
 
+    <!-- ===== LÍNEA DE TIEMPO ===== -->
+    <div class="card">
+      <h2 class="timeline-title">LÍNEA DE TIEMPO DEL PROYECTO DE LEY</h2>
+      <p class="timeline-subtitle">
+        Aquí puedes mostrar la cronología del proyecto: presentación, ingreso a comisión, pedidos de opinión, dictamen, debate, cuarto intermedio, aprobación u otros hitos.
+      </p>
+
+      <div class="timeline-scroll">
+        <div class="timeline">
+
+          <!-- PUNTO 1 -->
+          <div class="timeline-item">
+            <div class="timeline-date">20/10/2022</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <h3>Presentación del proyecto</h3>
+              <p>
+                Aquí escribe una descripción breve del hito. Por ejemplo:
+                “Se presenta el Proyecto de Ley N.° 3377 ante el Congreso de la República”.
+              </p>
+
+              <!-- SI QUIERES IMAGEN, CAMBIA la ruta -->
+              <img src="https://via.placeholder.com/400x220?text=Imagen+del+hito" alt="Imagen del hito" class="timeline-image">
+
+              <!-- SI QUIERES LINK, CAMBIA el href -->
+              <a href="#" target="_blank" class="timeline-link">Ver documento adjunto</a>
+            </div>
+          </div>
+
+          <!-- PUNTO 2 -->
+          <div class="timeline-item">
+            <div class="timeline-date">06/06/2024</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <h3>Dictamen en comisión principal</h3>
+              <p>
+                Aquí puedes poner el texto del segundo hito. Ejemplo:
+                “La Comisión de Energía y Minas presentó dictamen en mayoría con fórmula sustitutoria”.
+              </p>
+
+              <img src="https://via.placeholder.com/400x220?text=Segundo+hito" alt="Imagen del hito" class="timeline-image">
+              <a href="#" target="_blank" class="timeline-link">Abrir archivo</a>
+            </div>
+          </div>
+
+          <!-- PUNTO 3 -->
+          <div class="timeline-item">
+            <div class="timeline-date">02/12/2024</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <h3>Segundo dictamen</h3>
+              <p>
+                Aquí puedes colocar el siguiente avance legislativo del proyecto.
+              </p>
+
+              <img src="https://via.placeholder.com/400x220?text=Tercer+hito" alt="Imagen del hito" class="timeline-image">
+              <a href="#" target="_blank" class="timeline-link">Ver sustento</a>
+            </div>
+          </div>
+
+          <!-- PUNTO 4 -->
+          <div class="timeline-item">
+            <div class="timeline-date">17/03/2026</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <h3>Aprobación en comisión</h3>
+              <p>
+                Aquí puedes describir la sesión, aprobación del dictamen, estado de firmas u observaciones.
+              </p>
+
+              <img src="https://via.placeholder.com/400x220?text=Cuarto+hito" alt="Imagen del hito" class="timeline-image">
+              <a href="#" target="_blank" class="timeline-link">Ver acta o agenda</a>
+            </div>
+          </div>
+
+          <!-- PUNTO 5 -->
+          <div class="timeline-item">
+            <div class="timeline-date">DD/MM/AAAA</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <h3>Nuevo hito</h3>
+              <p>
+                Aquí agrega otro acontecimiento del proyecto de ley.
+              </p>
+
+              <div class="timeline-empty">Puedes poner imagen o link aquí.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div id="miPopup" class="popup">
@@ -424,8 +592,8 @@ Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
       <span class="close" onclick="cerrarPopup()">&times;</span>
       <h3>Resumen general</h3>
       <p>
-        El PPT presenta riesgos legislativos vinculados a concesiones mineras. Ambas iniciativas
-        son consideradas de impacto importante, muy probables en el periodo y con riesgo neutro.
+        La presente página resume riesgos legislativos vinculados a proyectos sobre concesiones mineras
+        y muestra, además, una línea de tiempo horizontal con los principales hitos del procedimiento legislativo.
       </p>
     </div>
   </div>
@@ -450,7 +618,6 @@ Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
       }
     }
 
-    /* SOLO SE AGREGA ESTO PARA QUE EL TOOLTIP NO SE CORTE */
     document.querySelectorAll('.tooltip').forEach(function(tooltipWrapper) {
       const trigger = tooltipWrapper;
       const tooltip = tooltipWrapper.querySelector('.tooltip-text');
