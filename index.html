@@ -23,9 +23,9 @@
       border-bottom: 1px solid #e5e7eb;
     }
 
-     .logo {
-       height: 80px; /* tamaño del logo */
-        width: auto;
+    .logo {
+      height: 80px;
+      width: auto;
     }
 
     .container {
@@ -174,22 +174,24 @@
     .icon-btn:hover {
       background: #cbd5e1;
     }
-.info-text {
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: bold;
-  color: #374151;
-  background: #e5e7eb;
-  padding: 6px 10px;
-  border-radius: 8px;
-  display: inline-block;
-  text-align: center;
-  transition: all 0.2s ease;
-}
 
-.info-text:hover {
-  background: #cbd5e1;
-}
+    .info-text {
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: bold;
+      color: #374151;
+      background: #e5e7eb;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display: inline-block;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .info-text:hover {
+      background: #cbd5e1;
+    }
+
     .objeto-wrap {
       display: flex;
       align-items: flex-start;
@@ -210,136 +212,6 @@
       align-items: center;
       gap: 4px;
       flex-shrink: 0;
-    }
-
-    /* ===== LÍNEA DE TIEMPO HORIZONTAL ===== */
-    .timeline-title {
-      margin-bottom: 8px;
-    }
-
-    .timeline-subtitle {
-      color: #6b7280;
-      font-size: 14px;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .timeline-scroll {
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding-bottom: 15px;
-    }
-
-    .timeline {
-      position: relative;
-      display: flex;
-      align-items: flex-start;
-      gap: 30px;
-      min-width: max-content;
-      padding: 45px 10px 10px 10px;
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      top: 88px;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(to right, #cbbfa8, #d8cfbd);
-      border-radius: 999px;
-    }
-
-    .timeline-item {
-      position: relative;
-      width: 280px;
-      flex: 0 0 280px;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      top: 73px;
-      left: 24px;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: #8b6f47;
-      border: 5px solid #f4f6f8;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-      z-index: 2;
-    }
-
-    .timeline-date {
-  position: absolute;
-  top: 22px;
-  left: 24px; /* mismo que el dot */
-  transform: translateX(-50%);
-  font-size: 16px;
-  font-weight: bold;
-  color: #8b6f47;
-  background: #f7f3ec;
-  border: 1px solid #eadfcd;
-  padding: 8px 14px;
-  border-radius: 999px;
-  white-space: nowrap;
-    }
-
-    .timeline-card {
-      margin-top: 110px;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-      min-height: 240px;
-    }
-
-    .timeline-card h3 {
-      margin: 0 0 10px 0;
-      font-size: 16px;
-      color: #111827;
-      line-height: 1.35;
-    }
-
-    .timeline-card p {
-      margin: 0 0 12px 0;
-      font-size: 14px;
-      line-height: 1.55;
-      color: #374151;
-    }
-
-    .timeline-image {
-      width: 100%;
-      border-radius: 12px;
-      object-fit: cover;
-      max-height: 140px;
-      margin-top: 8px;
-      margin-bottom: 12px;
-      border: 1px solid #e5e7eb;
-      display: block;
-    }
-
-    .timeline-link {
-      display: inline-block;
-      margin-top: 4px;
-      text-decoration: none;
-      background: #0f766e;
-      color: white;
-      padding: 9px 12px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .timeline-link:hover {
-      background: #115e59;
-    }
-
-    .timeline-empty {
-      color: #9ca3af;
-      font-size: 13px;
-      font-style: italic;
-      margin-top: 8px;
     }
 
     footer {
@@ -393,15 +265,6 @@
         margin-left: 0;
         margin-top: 8px;
       }
-
-      .timeline-item {
-        width: 240px;
-        flex: 0 0 240px;
-      }
-
-      .timeline-card {
-        min-height: 220px;
-      }
     }
   </style>
 </head>
@@ -429,14 +292,12 @@
             </tr>
           </thead>
           <tbody>
-            
-            <!-- FILA 2 -->
             <tr>
               <td class="col-numero">1</td>
 
               <td class="col-info">
-<span class="tooltip info-text">
-  8853
+                <span class="tooltip info-text">
+                  8853
                   <span class="tooltip-text">8853 (09-09-2024)
 Congresista Muñante Barrios, del Grupo Parlamentario Renovación Popular.<br><br>
 
@@ -473,10 +334,8 @@ Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
                     <span class="tooltip icon-btn">
                       👁
                       <span class="tooltip-text">En la Comisión de Energía y Minas del martes 17 de marzo de 2026 se APROBÓ el dictamen por mayoría.
-                     
-                      A hoy, jueves 19 de marzo, el dictamen aún no tiene firmas. Información directa del secretario técnico de la comisión. Recién desde hoy se recabarán estas.
 
-                      </span>
+A hoy, jueves 19 de marzo, el dictamen aún no tiene firmas. Información directa del secretario técnico de la comisión. Recién desde hoy se recabarán estas.</span>
                     </span>
 
                     <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">📄</a>
@@ -488,69 +347,8 @@ Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
               <td><span class="badge muy-probable">MUY PROBABLE</span></td>
               <td><span class="badge riesgo-alto">ALTO</span></td>
             </tr>
-
           </tbody>
         </table>
-      </div>
-    </div>
-
-    <!-- ===== LÍNEA DE TIEMPO ===== -->
-    <div class="card">
-      <h2 class="timeline-title">LÍNEA DE TIEMPO DEL PREDICTAMEN</h2>
-      <p class="timeline-subtitle">
-        LEY QUE MODIFICA LA LEY GENERAL DE MINERÍA, CUYO TEXTO ÚNICO ORDENADO FUE APROBADO POR DECRETO SUPREMO 014-92-EM, A FIN DE FORTALECER EL RÉGIMEN DE CONCESIONES MINERAS Y EVITAR LA EXISTENCIA DE CONCESIONES OCIOSAS.<br><br>
-<b>AUTORES:</b>
-Congresista <b>Muñante Barrios</b>, 
-Congresista <b>Dávila Atanacio</b>, 
-Congresista <b>Martínez Talavera</b>,
-Congresista <b>Gutiérrez Ticona</b>,
-Congresista <b>Sánchez Palomino</b>,
-Congresista <b>Bellido Ugarte</b>,
-Congresista <b>Quispe Mamani</b>, 
-Congresista <b>Cruz Mamani</b>,
-
-        
-      </p>
-
-      <div class="timeline-scroll">
-        <div class="timeline">
-
-<!-- PUNTO 1 -->
-<div class="timeline-item">
-  <div class="timeline-date">17/03/2026</div>
-  <div class="timeline-dot"></div>
-  <div class="timeline-card">
-    <h3>Debate del Predictamen en Comisión de Energia y Minas</h3>
-    <p>
-      Se debatió el predictamen.
-    </p>
-  </div>
-</div>
-          <!-- PUNTO 2 -->
-          <div class="timeline-item">
-            <div class="timeline-date">17/03/2026</div>
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <h3>Aprobación del Predictamen</h3>
-              <p>
-Se aprobó el Predictamen con xx votos a favor
-              </p>
-            </div>
-          </div>
-
-          <!-- PUNTO 3 -->
-          <div class="timeline-item">
-            <div class="timeline-date">17/03/2026</div>
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <h3>Ejecutando firmas del Predictamen</h3>
-              <p>
-                Ya se tiene las firmas, solo falta la firma del congresista Arturo Alegria.
-              </p>
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
 
@@ -561,8 +359,7 @@ Se aprobó el Predictamen con xx votos a favor
       <span class="close" onclick="cerrarPopup()">&times;</span>
       <h3>Resumen general</h3>
       <p>
-        La presente página resume riesgos legislativos vinculados a proyectos sobre concesiones mineras
-        y muestra, además, una línea de tiempo horizontal con los principales hitos del procedimiento legislativo.
+        La presente página resume riesgos legislativos vinculados a proyectos sobre concesiones mineras.
       </p>
     </div>
   </div>
