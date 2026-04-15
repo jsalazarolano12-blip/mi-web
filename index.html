@@ -23,9 +23,11 @@
       border-bottom: 1px solid #e5e7eb;
     }
 
-    .logo {
+    .logo-centro {
       height: 80px;
       width: auto;
+      max-width: 100%;
+      object-fit: contain;
     }
 
     .container {
@@ -84,45 +86,51 @@
     }
 
     .col-info {
-      width: 80px;
+      width: 90px;
       text-align: center;
     }
 
     .col-objeto {
-      width: 52%;
+      min-width: 360px;
+    }
+
+    .col-estado {
+      width: 150px;
+      text-align: center;
+    }
+
+    .col-tema {
+      min-width: 180px;
+    }
+
+    .col-riesgo {
+      width: 150px;
+      text-align: center;
     }
 
     .badge {
       display: inline-block;
-      padding: 6px 10px;
+      padding: 7px 12px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
-      color: white;
       text-align: center;
       line-height: 1.1;
       white-space: nowrap;
     }
 
-    .importante {
-      background: #d97706;
-    }
-
-    .muy-probable {
-      background: #2563eb;
-    }
-
-    .neutro {
-      background: #6b7280;
-    }
-
-    .riesgo-alto {
-      background: #dc2626;
+    .riesgo-favorable {
+      background: #16a34a;
       color: white;
     }
 
-    .riesgo-bajo {
-      background: #16a34a;
+    .riesgo-neutro {
+      background: #facc15;
+      color: #111827;
+    }
+
+    .riesgo-desfavorable {
+      background: #dc2626;
       color: white;
     }
 
@@ -169,6 +177,7 @@
       text-decoration: none;
       vertical-align: middle;
       flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
 
     .icon-btn:hover {
@@ -186,10 +195,30 @@
       display: inline-block;
       text-align: center;
       transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
 
     .info-text:hover {
       background: #cbd5e1;
+    }
+
+    .estado-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #e5e7eb;
+      color: #111827;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      transition: all 0.2s ease;
+    }
+
+    .estado-btn:hover {
+      background: #d1d5db;
+      transform: translateY(-1px);
     }
 
     .objeto-wrap {
@@ -212,6 +241,10 @@
       align-items: center;
       gap: 4px;
       flex-shrink: 0;
+    }
+
+    .tema-texto {
+      line-height: 1.45;
     }
 
     footer {
@@ -265,6 +298,16 @@
         margin-left: 0;
         margin-top: 8px;
       }
+
+      th, td {
+        font-size: 13px;
+        padding: 10px;
+      }
+
+      .estado-btn {
+        padding: 7px 12px;
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -286,12 +329,14 @@
               <th class="col-numero">N°</th>
               <th class="col-info">Info</th>
               <th class="col-objeto">Objeto del proyecto</th>
-              <th>Impacto</th>
-              <th>Probabilidad</th>
-              <th>Riesgo</th>
+              <th class="col-estado">Estado actual</th>
+              <th class="col-tema">Tema</th>
+              <th class="col-riesgo">Riesgo</th>
             </tr>
           </thead>
+
           <tbody>
+            <!-- FILA 1 -->
             <tr>
               <td class="col-numero">1</td>
 
@@ -308,7 +353,7 @@ Congresista Dávila Atanacio, del Grupo Parlamentario Bancada Socialista.<br><br
 Congresista Martínez Talavera, del Grupo Parlamentario Acción Popular.<br><br>
 
 11045 (07-05-2025)
-Congresista Gutiérrez Ticona, del Grupo Parlamentario, Bloque Magisterial.<br><br>
+Congresista Gutiérrez Ticona, del Grupo Parlamentario Bloque Magisterial.<br><br>
 
 12273 (02-09-2025)
 Congresista Sánchez Palomino, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.<br><br>
@@ -333,7 +378,7 @@ Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
                   <div class="objeto-icons">
                     <span class="tooltip icon-btn">
                       👁
-                      <span class="tooltip-text">En la Comisión de Energía y Minas del martes 17 de marzo de 2026 se APROBÓ el dictamen por mayoría.
+                      <span class="tooltip-text">En la Comisión de Energía y Minas del martes 17 de marzo de 2026 se aprobó el dictamen por mayoría.
 
 A hoy, jueves 19 de marzo, el dictamen aún no tiene firmas. Información directa del secretario técnico de la comisión. Recién desde hoy se recabarán estas.</span>
                     </span>
@@ -343,67 +388,120 @@ A hoy, jueves 19 de marzo, el dictamen aún no tiene firmas. Información direct
                 </div>
               </td>
 
-              <td><span class="badge importante">IMPORTANTE</span></td>
-              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
-              <td><span class="badge riesgo-alto">ALTO</span></td>
+              <td class="col-estado">
+                <span class="tooltip">
+                  <button type="button" class="estado-btn">Ver</button>
+                  <span class="tooltip-text">Aquí puedes escribir el estado actual editable de este proyecto.
+
+Ejemplo:
+El predictamen fue aprobado en comisión y se encuentra pendiente de firmas para continuar su trámite.</span>
+                </span>
+              </td>
+
+              <td class="col-tema">
+                <div class="tema-texto">
+                  Concesiones mineras
+                </div>
+              </td>
+
+              <td class="col-riesgo">
+                <span class="badge riesgo-desfavorable">Desfavorable</span>
+              </td>
             </tr>
-    <tr>
+
+            <!-- FILA 2 -->
+            <tr>
               <td class="col-numero">2</td>
 
               <td class="col-info">
                 <span class="tooltip info-text">
-                  8853
-                  <span class="tooltip-text">8853 (09-09-2024)
-Congresista Muñante Barrios, del Grupo Parlamentario Renovación Popular.<br><br>
-
-9386 (31-10-2024)
-Congresista Dávila Atanacio, del Grupo Parlamentario Bancada Socialista.<br><br>
-
-10610 (24-03-2025)
-Congresista Martínez Talavera, del Grupo Parlamentario Acción Popular.<br><br>
-
-11045 (07-05-2025)
-Congresista Gutiérrez Ticona, del Grupo Parlamentario, Bloque Magisterial.<br><br>
-
-12273 (02-09-2025)
-Congresista Sánchez Palomino, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.<br><br>
-
-12708 y 12730 (09-10-2025)
-Congresista Bellido Ugarte, del Grupo Parlamentario Podemos Perú.<br><br>
-
-13481 (04-12-2025)
-Congresista Quispe Mamani, del Grupo Parlamentario Juntos por el Perú – Voces del Pueblo – Bloque Magisterial.<br><br>
-
-13497 (05-12-2025)
-Congresista Cruz Mamani, del Grupo Parlamentario Perú Libre.</span>
+                  9001
+                  <span class="tooltip-text">9001 (10-01-2026)
+Congresista de ejemplo.<br><br>
+Aquí puedes reemplazar todo este contenido por la información real que quieras mostrar en el cuadro de info.</span>
                 </span>
               </td>
 
               <td>
                 <div class="objeto-wrap">
                   <div class="objeto-texto">
-                    Ley que modifica la Ley General de Minería, cuyo Texto Único Ordenado fue aprobado por Decreto Supremo 014-92-EM, a fin de fortalecer el régimen de concesiones mineras y evitar la existencia de concesiones ociosas.
+                    Aquí puedes colocar el texto del objeto del proyecto que corresponda a la segunda fila.
                   </div>
 
                   <div class="objeto-icons">
                     <span class="tooltip icon-btn">
                       👁
-                      <span class="tooltip-text">En la Comisión de Energía y Minas del martes 17 de marzo de 2026 se APROBÓ el dictamen por mayoría.
-
-A hoy, jueves 19 de marzo, el dictamen aún no tiene firmas. Información directa del secretario técnico de la comisión. Recién desde hoy se recabarán estas.</span>
+                      <span class="tooltip-text">Aquí puedes editar la información del ojito de la tercera columna, igual que en la primera fila.</span>
                     </span>
 
-                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 1">📄</a>
+                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 2">📄</a>
                   </div>
                 </div>
               </td>
 
-              <td><span class="badge importante">IMPORTANTE</span></td>
-              <td><span class="badge muy-probable">MUY PROBABLE</span></td>
-              <td><span class="badge riesgo-alto">ALTO</span></td>
+              <td class="col-estado">
+                <span class="tooltip">
+                  <button type="button" class="estado-btn">Ver</button>
+                  <span class="tooltip-text">Aquí puedes editar libremente el contenido que aparecerá al pasar el cursor sobre el botón Ver.</span>
+                </span>
+              </td>
 
+              <td class="col-tema">
+                <div class="tema-texto">
+                  Tema de ejemplo
+                </div>
+              </td>
 
-             </tr>
+              <td class="col-riesgo">
+                <span class="badge riesgo-neutro">Neutro</span>
+              </td>
+            </tr>
+
+            <!-- FILA 3 DE EJEMPLO -->
+            <tr>
+              <td class="col-numero">3</td>
+
+              <td class="col-info">
+                <span class="tooltip info-text">
+                  9002
+                  <span class="tooltip-text">Información editable de la fila 3.</span>
+                </span>
+              </td>
+
+              <td>
+                <div class="objeto-wrap">
+                  <div class="objeto-texto">
+                    Texto editable del objeto del proyecto en la fila 3.
+                  </div>
+
+                  <div class="objeto-icons">
+                    <span class="tooltip icon-btn">
+                      👁
+                      <span class="tooltip-text">Más información editable para el ícono de la fila 3.</span>
+                    </span>
+
+                    <a href="https://www.congreso.gob.pe/" target="_blank" class="icon-btn" title="Link 3">📄</a>
+                  </div>
+                </div>
+              </td>
+
+              <td class="col-estado">
+                <span class="tooltip">
+                  <button type="button" class="estado-btn">Ver</button>
+                  <span class="tooltip-text">Estado actual editable de la fila 3.</span>
+                </span>
+              </td>
+
+              <td class="col-tema">
+                <div class="tema-texto">
+                  Política minera
+                </div>
+              </td>
+
+              <td class="col-riesgo">
+                <span class="badge riesgo-favorable">Favorable</span>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -439,7 +537,7 @@ A hoy, jueves 19 de marzo, el dictamen aún no tiene firmas. Información direct
       if (event.target === popup) {
         popup.style.display = "none";
       }
-    }
+    };
 
     document.querySelectorAll('.tooltip').forEach(function(tooltipWrapper) {
       const trigger = tooltipWrapper;
