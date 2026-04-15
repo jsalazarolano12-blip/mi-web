@@ -18,31 +18,60 @@
 
     header {
       background: white;
-      padding: 25px 0;
-      text-align: center;
+      padding: 20px 0;
       border-bottom: 1px solid #e5e7eb;
     }
 
+    .header-wrap {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     .logo-centro {
-      height: 80px;
+      height: 160px; /* AQUÍ aumenté el logo */
       width: auto;
-      max-width: 100%;
       object-fit: contain;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .header-texto {
+      flex: 1;
+    }
+
+    .header-texto h1 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.35;
+      font-weight: 800;
+      color: #000;
+      text-transform: uppercase;
     }
 
     .container {
       width: 92%;
       max-width: 1200px;
-      margin: 30px auto;
+      margin: 28px auto;
     }
 
     .card {
       background: white;
       border-radius: 14px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      padding: 20px;
+      padding: 18px;
       margin-bottom: 25px;
       overflow: visible;
+    }
+
+    .card h2 {
+      margin: 12px 0 18px 0;
+      font-size: 21px;
+      color: #0f2747;
+      text-transform: uppercase;
     }
 
     .table-wrap {
@@ -55,7 +84,6 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
       background: white;
       border-radius: 12px;
       overflow: visible;
@@ -64,7 +92,6 @@
     th, td {
       border: 1px solid #d1d5db;
       padding: 12px;
-      text-align: left;
       vertical-align: top;
       font-size: 14px;
       overflow: visible;
@@ -73,6 +100,13 @@
     th {
       background: #cbbfa8;
       color: #111827;
+      text-align: center; /* AQUÍ centré todos los títulos */
+      vertical-align: middle;
+      font-weight: 700;
+    }
+
+    td {
+      text-align: left;
     }
 
     tr:nth-child(even) {
@@ -91,7 +125,7 @@
     }
 
     .col-objeto {
-      min-width: 360px;
+      min-width: 420px;
     }
 
     .col-estado {
@@ -100,7 +134,7 @@
     }
 
     .col-tema {
-      min-width: 180px;
+      min-width: 170px;
     }
 
     .col-riesgo {
@@ -110,7 +144,7 @@
 
     .badge {
       display: inline-block;
-      padding: 7px 12px;
+      padding: 7px 14px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
@@ -204,7 +238,7 @@
 
     .estado-btn {
       display: inline-block;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border: none;
       border-radius: 10px;
       background: #e5e7eb;
@@ -231,7 +265,7 @@
     .objeto-texto {
       flex: 1;
       min-width: 0;
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     .objeto-icons {
@@ -245,13 +279,6 @@
 
     .tema-texto {
       line-height: 1.45;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #6b7280;
-      font-size: 14px;
     }
 
     .popup {
@@ -284,7 +311,27 @@
       color: #444;
     }
 
+    footer {
+      text-align: center;
+      padding: 22px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
     @media (max-width: 900px) {
+      .header-wrap {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo-centro {
+        height: 120px;
+      }
+
+      .header-texto h1 {
+        font-size: 20px;
+      }
+
       .tooltip .tooltip-text {
         width: min(280px, calc(100vw - 24px));
         max-width: calc(100vw - 24px);
@@ -313,12 +360,21 @@
 </head>
 <body>
 
-  <header class="header-logo">
-    <img src="logo.JPG" alt="Logo" class="logo-centro">
+  <header>
+    <div class="header-wrap">
+      <img src="logo.JPG" alt="Logo" class="logo-centro">
+
+      <div class="header-texto">
+        <h1>
+          CONSULTORÍA PARA EL SEGUIMIENTO DE INICIATIVAS LEGISLATIVAS<br>
+          EN EL CONGRESO DE LA REPÚBLICA DEL PERÚ<br>
+          RIESGOS Y/O OPORTUNIDADES
+        </h1>
+      </div>
+    </div>
   </header>
 
   <div class="container">
-
     <div class="card">
       <h2>RIESGOS LEGISLATIVOS</h2>
 
@@ -336,7 +392,6 @@
           </thead>
 
           <tbody>
-            <!-- FILA 1 -->
             <tr>
               <td class="col-numero">1</td>
 
@@ -409,7 +464,6 @@ El predictamen fue aprobado en comisión y se encuentra pendiente de firmas para
               </td>
             </tr>
 
-            <!-- FILA 2 -->
             <tr>
               <td class="col-numero">2</td>
 
@@ -457,7 +511,6 @@ Aquí puedes reemplazar todo este contenido por la información real que quieras
               </td>
             </tr>
 
-            <!-- FILA 3 DE EJEMPLO -->
             <tr>
               <td class="col-numero">3</td>
 
@@ -506,7 +559,6 @@ Aquí puedes reemplazar todo este contenido por la información real que quieras
         </table>
       </div>
     </div>
-
   </div>
 
   <div id="miPopup" class="popup">
