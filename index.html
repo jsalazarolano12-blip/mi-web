@@ -23,9 +23,15 @@
       border-bottom: 1px solid #e5e7eb;
     }
 
+    .header-inner {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
     .logo-centro {
-      width: 620px;
-      max-width: 92%;
+      width: 100%;
+      max-width: 100%;
       height: auto;
       object-fit: contain;
       display: block;
@@ -45,6 +51,61 @@
       padding: 20px;
       margin-bottom: 25px;
       overflow: visible;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 14px;
+    }
+
+    .filtros-riesgo {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .filtro-btn {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.1;
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+
+    .filtro-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+
+    .filtro-btn.activo {
+      box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.15);
+    }
+
+    .filtro-desfavorable {
+      background: #dc2626;
+      color: white;
+    }
+
+    .filtro-neutro {
+      background: #facc15;
+      color: #111827;
+    }
+
+    .filtro-favorable {
+      background: #16a34a;
+      color: white;
+    }
+
+    .filtro-todos {
+      background: #6b7280;
+      color: white;
     }
 
     .table-wrap {
@@ -311,9 +372,8 @@
         font-size: 12px;
       }
 
-      .logo-centro {
-        width: 95%;
-        max-width: 520px;
+      .filtros-riesgo {
+        gap: 8px;
       }
     }
   </style>
@@ -321,13 +381,22 @@
 <body>
 
   <header class="header-logo">
-    <img src="logo.JPG" alt="Logo" class="logo-centro">
+    <div class="header-inner">
+      <img src="logo.JPG" alt="Logo" class="logo-centro">
+    </div>
   </header>
 
   <div class="container">
 
     <div class="card">
       <h2>RIESGOS LEGISLATIVOS</h2>
+
+      <div class="filtros-riesgo">
+        <button type="button" class="filtro-btn filtro-desfavorable" data-filtro="Desfavorable">Desfavorable</button>
+        <button type="button" class="filtro-btn filtro-neutro" data-filtro="Neutro">Neutro</button>
+        <button type="button" class="filtro-btn filtro-favorable" data-filtro="Favorable">Favorable</button>
+        <button type="button" class="filtro-btn filtro-todos activo" data-filtro="Todos">Todos</button>
+      </div>
 
       <div class="table-wrap">
         <table>
@@ -342,7 +411,7 @@
             </tr>
           </thead>
 
-          <tbody>
+          <tbody id="tabla-riesgos-body">
             <!-- FILA 1 -->
             <tr>
               <td class="col-numero">1</td>
@@ -593,6 +662,34 @@ Aquí puedes reemplazar todo este contenido por la información real que quieras
       trigger.addEventListener('mouseleave', function() {
         tooltip.style.visibility = 'hidden';
         tooltip.style.opacity = '0';
+      });
+    });
+
+    const botonesFiltro = document.querySelectorAll('.filtro-btn');
+    const filasTabla = document.querySelectorAll('#tabla-riesgos-body tr');
+
+    botonesFiltro.forEach(function(boton) {
+      boton.addEventListener('click', function() {
+        const filtro = boton.getAttribute('data-filtro');
+
+        botonesFiltro.forEach(function(btn) {
+          btn.classList.remove('activo');
+        });
+
+        boton.classList.add('activo');
+
+        filasTabla.forEach(function(fila) {
+          const badge = fila.querySelector('.col-riesgo .badge');
+          if (!badge) return;
+
+          const textoRiesgo = badge.textContent.trim();
+
+          if (filtro === 'Todos' || textoRiesgo === filtro) {
+            fila.style.display = '';
+          } else {
+            fila.style.display = 'none';
+          }
+        });
       });
     });
   </script>
